@@ -1,4 +1,5 @@
-
+//for dealing with multiple keydowns at once:
+//https://stackoverflow.com/questions/5203407/how-to-detect-if-multiple-keys-are-pressed-at-once-using-javascript
 var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext('2d');
 
@@ -9,13 +10,17 @@ var mouseyCo = 0;
 var maxX = canvas.width;
 var maxY = canvas.height;
 
-
-
 function drawCat() {
 	crazycat = new Image();
 	crazycat.src = "images/crazyCat.gif";
 	mouse = new Image();
 	mouse.src = "images/mouse.jpg";
+	//Cat & mouse width + heights for collision
+	catWidth = crazycat.naturalWidth;
+	catHeight = crazycat.naturalHeight;
+	mouseWidth = mouse.naturalWidth;
+	mouseHeight = mouse.naturalHeight;
+
 	crazycat.onload = function(){
 		ctx.drawImage(mouse, mousexCo, mouseyCo);
 		ctx.drawImage(crazycat, catxCo, catyCo);
@@ -31,13 +36,36 @@ function drawCat() {
 		
 		alert("ayo bro you the cat there good job");
 	}
+
+	if (checkCollision(catWidth, catHeight, mouseWidth, mouseHeight)) {
+		alert("oh shit ouch fuck, cat ate the mouse");
+	}
 };
+
+function checkCollision(cWidth, cHeight, mWidth, mHeight) {
+	var overlapX = ((catxCo <= (mousexCo + mWidth) && catxCo >= mousexCo) 
+		|| ((catxCo + cWidth) <= (mousexCo + mWidth)) && ((catxCo + cWidth) >= mousexCo));
+	var overlapY = ((catyCo <= (mouseyCo + mHeight) && catyCo >= mouseyCo) 
+		|| ((catyCo + cHeight) <= (mouseyCo + mHeight)) && ((catyCo + cHeight) >= mouseyCo));
+
+	if (overlapX && overlapY) {
+		return true;
+	} else {
+		return false;
+	}
+}
 
 function drawMouse() {
 	mouse = new Image();
 	mouse.src = "images/mouse.jpg";
 	crazycat = new Image();
 	crazycat.src = "images/crazyCat.gif";
+	//Cat & mouse width + heights for collision
+	catWidth = crazycat.naturalWidth;
+	catHeight = crazycat.naturalHeight;
+	mouseWidth = mouse.naturalWidth;
+	mouseHeight = mouse.naturalHeight;
+	
 	mouse.onload = function(){
 		ctx.drawImage(mouse, mousexCo, mouseyCo);
 		ctx.drawImage(crazycat, catxCo, catyCo);
@@ -51,6 +79,10 @@ function drawMouse() {
 		}
 		
 		alert("ayo bro you the cat there good job");
+	}
+
+	if (checkCollision(catWidth, catHeight, mouseWidth, mouseHeight)) {
+		alert("oh shit ouch fuck, cat ate the mouse");
 	}
 };
 
