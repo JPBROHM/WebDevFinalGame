@@ -2,24 +2,26 @@
 var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext('2d');
 
-var xCo = 0;
-var yCo = 0;
+var catxCo = 500;
+var catyCo = 500;
+var mousexCo = 0;
+var mouseyCo = 0;
 var maxX = canvas.width;
 var maxY = canvas.height;
 
 
 
 function drawCat() {
-	ctx.font = "12px Arial";
-	var displayText = "Here Kitty";
-	const dspTxtWidth = ctx.measureText(displayText).width + 10;
-	ctx.fillText(displayText, canvas.width - dspTxtWidth, canvas.height - 12);
 	crazycat = new Image();
 	crazycat.src = "images/crazyCat.gif";
+	mouse = new Image();
+	mouse.src = "images/mouse.jpg";
 	crazycat.onload = function(){
-		ctx.drawImage(crazycat, xCo, yCo);
+		ctx.drawImage(mouse, mousexCo, mouseyCo);
+		ctx.drawImage(crazycat, catxCo, catyCo);
+		
 	}
-	if (xCo >= (canvas.width - crazycat.width) && (yCo + crazycat.height) >= maxY){
+	if (catxCo >= (canvas.width - crazycat.width) && (catyCo + crazycat.height) >= maxY){
 		var youClass = document.getElementsByClassName("you");
 		
 		for (i = 0; i < youClass.length; i++){
@@ -31,26 +33,69 @@ function drawCat() {
 	}
 };
 
+function drawMouse() {
+	mouse = new Image();
+	mouse.src = "images/mouse.jpg";
+	crazycat = new Image();
+	crazycat.src = "images/crazyCat.gif";
+	mouse.onload = function(){
+		ctx.drawImage(mouse, mousexCo, mouseyCo);
+		ctx.drawImage(crazycat, catxCo, catyCo);
+	}
+	if (mousexCo >= (canvas.width - mouse.width) && (mouseyCo + mouse.height) >= maxY){
+		var youClass = document.getElementsByClassName("you");
+		
+		for (i = 0; i < youClass.length; i++){
+			youClass[i].style.color = "pink";
+			youClass[i].style.fontSize = "30px";
+		}
+		
+		alert("ayo bro you the cat there good job");
+	}
+};
+
+
 document.onkeydown = function(event){
-	if(event.key == "ArrowRight" && (xCo + crazycat.width)<maxX){
+	if(event.key == "ArrowRight" && (catxCo + crazycat.width)<maxX){
 		ctx.clearRect(0,0,1500,1000);
-		xCo += 15;
+		catxCo += 15;
 		drawCat();
 	}
-	if(event.key == "ArrowLeft" && xCo>0){
+	if(event.key == "ArrowLeft" && catxCo>0){
 		ctx.clearRect(0,0,1500,1000);
-		xCo -= 15;
+		catxCo -= 15;
 		drawCat();
 	}
-	if(event.key == "ArrowUp" && yCo>0){
+	if(event.key == "ArrowUp" && catyCo>0){
 		ctx.clearRect(0,0,1500,1000);
-		yCo -= 15;
+		catyCo -= 15;
 		drawCat();
 	}
-	if(event.key == "ArrowDown" && (yCo + crazycat.height)<maxY){
+	if(event.key == "ArrowDown" && (catyCo + crazycat.height)<maxY){
 		ctx.clearRect(0,0,1500,1000);
-		yCo += 15;
+		catyCo += 15;
 		drawCat();
+	}
+
+	if(event.key == "d" && (mousexCo + mouse.width)<maxX){
+		ctx.clearRect(0,0,1500,1000);
+		mousexCo += 15;
+		drawMouse();
+	}
+	if(event.key == "a" && mousexCo>0){
+		ctx.clearRect(0,0,1500,1000);
+		mousexCo -= 15;
+		drawMouse();
+	}
+	if(event.key == "w" && mouseyCo>0){
+		ctx.clearRect(0,0,1500,1000);
+		mouseyCo -= 15;
+		drawMouse();
+	}
+	if(event.key == "s" && (mouseyCo + mouse.height)<maxY){
+		ctx.clearRect(0,0,1500,1000);
+		mouseyCo += 15;
+		drawMouse();
 	}
 	
 };
