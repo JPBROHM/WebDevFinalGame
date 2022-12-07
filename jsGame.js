@@ -12,6 +12,16 @@ var maxY = canvas.height;
 var cheese = [false, false, false, false, false, false, false, false];
 var cheesexCo = [10, 10, 1350, 1350, 750, 300, 800, 666];
 var cheeseyCo = [10, 850, 10, 850, 666,  386, 45, 420];
+var cheeseCollected = 0;
+
+function initalize() {
+	catxCo = 600;
+	catyCo = 600;
+	mousexCo = 1250;
+	mouseyCo = 350;
+	cheese = [false, false, false, false, false, false, false, false];
+	cheeseCollected = 0;
+}
 
 function drawCat() {
 	crazycat = new Image();
@@ -27,13 +37,17 @@ function drawCat() {
 	catHeight = crazycat.naturalHeight;
 	mouseWidth = mouse.naturalWidth;
 	mouseHeight = mouse.naturalHeight;
+	cheeseWidth = cheesePic.naturalWidth;
+	cheeseHeight = cheesePic.naturalHeight;
+	holeWidth = hole.naturalWidth;
+	holeHeight = hole.naturalHeight;
 
 	crazycat.onload = function(){
 		ctx.drawImage(mouse, mousexCo, mouseyCo);
 		ctx.drawImage(crazycat, catxCo, catyCo);
 		for (i = 0; i < 8; i++){
+			checkCheese(i, cheeseWidth, cheeseHeight, mouseWidth, mouseHeight);
 			if (cheese[i] == false){
-				console.log("yeet");
 				ctx.drawImage(cheesePic, cheesexCo[i], cheeseyCo[i]);
 			}
 		}
@@ -53,13 +67,18 @@ function drawCat() {
 
 	if (checkCollision(catWidth, catHeight, mouseWidth, mouseHeight)) {
 		alert("oh shit ouch fuck, cat ate the mouse");
+		initalize();
+	}
+	if (checkHole(holeWidth, holeHeight, mouseWidth, mouseHeight)) {
+		alert("oh shit oh fuck mouse's fam be eatin' tonight babbyyy");
+		initalize();
 	}
 };
 
 function checkCollision(cWidth, cHeight, mWidth, mHeight) {
-	var overlapX = ((mousexCo <= (catxCo + cWidth) && mousexCo >= catxCo) 
+	overlapX = ((mousexCo <= (catxCo + cWidth) && mousexCo >= catxCo) 
 		|| ((mousexCo + mWidth) <= (catxCo + cWidth)) && ((mousexCo + mWidth) >= catxCo));
-	var overlapY = ((mouseyCo <= (catyCo + cHeight) && mouseyCo >= catyCo) 
+	overlapY = ((mouseyCo <= (catyCo + cHeight) && mouseyCo >= catyCo) 
 		|| ((mouseyCo + mHeight) <= (catyCo + cHeight)) && ((mouseyCo + mHeight) >= catyCo));
 
 	if (overlapX && overlapY) {
@@ -69,6 +88,38 @@ function checkCollision(cWidth, cHeight, mWidth, mHeight) {
 	}
 }
 
+function checkCheese(cheeseIdx, cWidth, cHeight, mWidth, mHeight) {
+	cheezxCo = cheesexCo[cheeseIdx];
+	cheezyCo = cheeseyCo[cheeseIdx];
+	overlapX = ((mousexCo <= (cheezxCo + cWidth) && (mousexCo >= cheezxCo)) 
+		|| ((mousexCo + mWidth) <= (cheezxCo + cWidth)) && ((mousexCo + mWidth) >= cheezxCo));
+	overlapY = ((mouseyCo <= (cheezyCo + cHeight) &&(mouseyCo >= cheezyCo)) 
+		|| ((mouseyCo + mHeight) <= (cheezyCo + cHeight)) && ((mouseyCo + mHeight) >= cheezyCo));
+
+	if (overlapX && overlapY) {
+		if (cheese[cheeseIdx] == false) {
+			cheeseCollected += 1;
+			cheese[cheeseIdx] = true;
+			alert(cheeseCollected);
+		}
+	}
+}
+
+function checkHole(hWidth, hHeight, mWidth, mHeight) {
+	overlapX = ((mousexCo <= (1250 + hWidth) && mousexCo >= 1250) 
+		|| ((mousexCo + mWidth) <= (1250 + hWidth)) && ((mousexCo + mWidth) >= 1250));
+	overlapY = ((mouseyCo <= (450 + hHeight) && mouseyCo >= 450) 
+		|| ((mouseyCo + mHeight) <= (450 + hHeight)) && ((mouseyCo + mHeight) >= 450));
+
+	if ((overlapX && overlapY) && (cheeseCollected >= 5)) {
+		if (cheeseCollected >= 8) {
+			alert("yo fuck that cat there's no more g-dang cheese left");
+		}
+		return true;
+	} else {
+		return false;
+	}
+}
 
 
 function drawMouse() {
@@ -85,11 +136,16 @@ function drawMouse() {
 	catHeight = crazycat.naturalHeight;
 	mouseWidth = mouse.naturalWidth;
 	mouseHeight = mouse.naturalHeight;
+	cheeseWidth = cheesePic.naturalWidth;
+	cheeseHeight = cheesePic.naturalHeight;
+	holeWidth = hole.naturalWidth;
+	holeHeight = hole.naturalHeight;
 
 	mouse.onload = function(){
 		ctx.drawImage(mouse, mousexCo, mouseyCo);
 		ctx.drawImage(crazycat, catxCo, catyCo);
 		for (i = 0; i < 8; i++){
+			checkCheese(i, cheeseWidth, cheeseHeight, mouseWidth, mouseHeight);
 			if (cheese[i] == false){
 				ctx.drawImage(cheesePic, cheesexCo[i], cheeseyCo[i]);
 			}
@@ -109,6 +165,14 @@ function drawMouse() {
 
 	if (checkCollision(catWidth, catHeight, mouseWidth, mouseHeight)) {
 		alert("oh shit ouch fuck, cat ate the mouse");
+		initalize();
+	}
+	if (checkHole(holeWidth, holeHeight, mouseWidth, mouseHeight)) {
+		alert("oh shit oh fuck mouse's fam be eatin' tonight babbyyy");
+		initalize();
+		if (cheeseCollected >= 8) {
+			alert("yo fuck that cat there's no more g-dang cheese left");
+		}
 	}
 };
 
