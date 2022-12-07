@@ -43,10 +43,10 @@ function drawCat() {
 };
 
 function checkCollision(cWidth, cHeight, mWidth, mHeight) {
-	var overlapX = ((catxCo <= (mousexCo + mWidth) && catxCo >= mousexCo) 
-		|| ((catxCo + cWidth) <= (mousexCo + mWidth)) && ((catxCo + cWidth) >= mousexCo));
-	var overlapY = ((catyCo <= (mouseyCo + mHeight) && catyCo >= mouseyCo) 
-		|| ((catyCo + cHeight) <= (mouseyCo + mHeight)) && ((catyCo + cHeight) >= mouseyCo));
+	var overlapX = ((mousexCo <= (catxCo + cWidth) && mousexCo >= catxCo) 
+		|| ((mousexCo + mWidth) <= (catxCo + cWidth)) && ((mousexCo + mWidth) >= catxCo));
+	var overlapY = ((mouseyCo <= (catyCo + cHeight) && mouseyCo >= catyCo) 
+		|| ((mouseyCo + mHeight) <= (catyCo + cHeight)) && ((mouseyCo + mHeight) >= catyCo));
 
 	if (overlapX && overlapY) {
 		return true;
@@ -65,7 +65,7 @@ function drawMouse() {
 	catHeight = crazycat.naturalHeight;
 	mouseWidth = mouse.naturalWidth;
 	mouseHeight = mouse.naturalHeight;
-	
+
 	mouse.onload = function(){
 		ctx.drawImage(mouse, mousexCo, mouseyCo);
 		ctx.drawImage(crazycat, catxCo, catyCo);
