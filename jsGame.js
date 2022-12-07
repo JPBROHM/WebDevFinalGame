@@ -3,18 +3,25 @@
 var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext('2d');
 
-var catxCo = 500;
-var catyCo = 500;
-var mousexCo = 0;
-var mouseyCo = 0;
+var catxCo = 600;
+var catyCo = 600;
+var mousexCo = 1250;
+var mouseyCo = 350;
 var maxX = canvas.width;
 var maxY = canvas.height;
+var cheese = [false, false, false, false, false, false, false, false];
+var cheesexCo = [10, 10, 1350, 1350, 750, 300, 800, 666];
+var cheeseyCo = [10, 850, 10, 850, 666,  386, 45, 420];
 
 function drawCat() {
 	crazycat = new Image();
 	crazycat.src = "images/crazyCat.gif";
 	mouse = new Image();
 	mouse.src = "images/mouse.jpg";
+	cheesePic = new Image();
+	cheesePic.src = "images/cheese.jpg";
+	hole = new Image();
+	hole.src = "images/hole.jpg";
 	//Cat & mouse width + heights for collision
 	catWidth = crazycat.naturalWidth;
 	catHeight = crazycat.naturalHeight;
@@ -24,6 +31,13 @@ function drawCat() {
 	crazycat.onload = function(){
 		ctx.drawImage(mouse, mousexCo, mouseyCo);
 		ctx.drawImage(crazycat, catxCo, catyCo);
+		for (i = 0; i < 8; i++){
+			if (cheese[i] == false){
+				console.log("yeet");
+				ctx.drawImage(cheesePic, cheesexCo[i], cheeseyCo[i]);
+			}
+		}
+		ctx.drawImage(hole, 1250, 450);
 		
 	}
 	if (catxCo >= (canvas.width - crazycat.width) && (catyCo + crazycat.height) >= maxY){
@@ -55,11 +69,17 @@ function checkCollision(cWidth, cHeight, mWidth, mHeight) {
 	}
 }
 
+
+
 function drawMouse() {
 	mouse = new Image();
 	mouse.src = "images/mouse.jpg";
 	crazycat = new Image();
 	crazycat.src = "images/crazyCat.gif";
+	cheesePic = new Image();
+	cheesePic.src = "images/cheese.jpg";
+	hole = new Image();
+	hole.src = "images/hole.jpg";
 	//Cat & mouse width + heights for collision
 	catWidth = crazycat.naturalWidth;
 	catHeight = crazycat.naturalHeight;
@@ -69,6 +89,12 @@ function drawMouse() {
 	mouse.onload = function(){
 		ctx.drawImage(mouse, mousexCo, mouseyCo);
 		ctx.drawImage(crazycat, catxCo, catyCo);
+		for (i = 0; i < 8; i++){
+			if (cheese[i] == false){
+				ctx.drawImage(cheesePic, cheesexCo[i], cheeseyCo[i]);
+			}
+		}
+		ctx.drawImage(hole, 1250, 450);
 	}
 	if (mousexCo >= (canvas.width - mouse.width) && (mouseyCo + mouse.height) >= maxY){
 		var youClass = document.getElementsByClassName("you");
