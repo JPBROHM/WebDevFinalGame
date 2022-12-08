@@ -3,15 +3,7 @@
   box-sizing: border-box;
 }
 
-.row {
-  display: flex;
-}
 
-/* Create two equal columns that sits next to each other */
-.column {
-  flex: 50%;
-  padding: 10px;
-}
 
 /* Style the canvas where an image will be displayed */
 #myCanvas {
@@ -23,30 +15,26 @@
 }
 
 /* Style the card. Notice the use of variables, which are Part 2f */
-#theCard {
+#gameScreen {
 	background-color: var(--bg-color);
 	color: var(--font-color);
 	border: .5em solid var(--border-color);
 }
 
-/* A few more styling and layout options */
-#toField {
-	font-style: italic;
+
+
+
+
+.score{
+  font-size: 3em;
 }
 
-p {
-	margin-left: 1em;
+#mouseScore{
+  color: #014421;
 }
 
-.stacked {
-	margin-left: 2em;
-	margin-top: 2em;
-}
+#catScore{
+  color: #800000;
 
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
 }
 

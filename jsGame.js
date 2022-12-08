@@ -13,6 +13,14 @@ var cheese = [false, false, false, false, false, false, false, false];
 var cheesexCo = [10, 10, 1350, 1350, 750, 300, 800, 666];
 var cheeseyCo = [10, 850, 10, 850, 666,  386, 45, 420];
 var cheeseCollected = 0;
+var catS = 0;
+var mouseS = 0;
+mouseString = "Mouse Score: ";
+mouseString += mouseS;
+document.getElementById("mouseScore").innerHTML = mouseString;
+catString = "Cat Score: ";
+catString += catS;
+document.getElementById("catScore").innerHTML = catString;
 
 function initalize() {
 	catxCo = 600;
@@ -57,10 +65,18 @@ function drawCat() {
 
 	if (checkCollision(catWidth, catHeight, mouseWidth, mouseHeight)) {
 		alert("Yowch! The cat has caught the mouse! One win to the cat");
+		catS += 1;
+		catString = "Cat Score: ";
+		catString += catS;
+		document.getElementById("catScore").innerHTML = catString;
 		initalize();
 	}
 	if (checkHole(holeWidth, holeHeight, mouseWidth, mouseHeight)) {
 		alert("Hooray! The mouse's fam gets to eat tonight! One win to the mouse");
+		mouseS += 1;
+		mouseString = "Mouse Score: ";
+		mouseString += mouseS;
+		document.getElementById("mouseScore").innerHTML = mouseString;
 		initalize();
 	}
 };
@@ -103,6 +119,10 @@ function checkHole(hWidth, hHeight, mWidth, mHeight) {
 	if ((overlapX && overlapY) && (cheeseCollected >= 5)) {
 		if (cheeseCollected >= 8) {
 			alert("Woooaaah!! All 8 cheeses! That's an extra win to the mouse for this round!");
+			mouseS += 1;
+			mouseString = "Mouse Score: ";
+			mouseString += mouseS;
+			document.getElementById("mouseScore").innerHTML = mouseString;
 		}
 		return true;
 	} else {
@@ -144,14 +164,19 @@ function drawMouse() {
 
 	if (checkCollision(catWidth, catHeight, mouseWidth, mouseHeight)) {
 		alert("Yowch! The cat has caught the mouse! One win to the cat");
+		catS += 1;
+		catString = "Cat Score: ";
+		catString += catS;
+		document.getElementById("catScore").innerHTML = catString;
 		initalize();
 	}
 	if (checkHole(holeWidth, holeHeight, mouseWidth, mouseHeight)) {
 		alert("Hooray! The mouse's fam gets to eat tonight! One win to the mouse");
+		mouseS += 1;
+		mouseString = "Mouse Score: ";
+		mouseString += mouseS;
+		document.getElementById("mouseScore").innerHTML = mouseString;
 		initalize();
-		if (cheeseCollected >= 8) {
-			alert("yo fuck that cat there's no more g-dang cheese left");
-		}
 	}
 };
 
@@ -180,22 +205,22 @@ document.onkeydown = function(event){
 
 	if(event.key == "d" && (mousexCo + mouse.width)<maxX){
 		ctx.clearRect(0,0,1500,1000);
-		mousexCo += 15;
+		mousexCo += 25;
 		drawMouse();
 	}
 	if(event.key == "a" && mousexCo>0){
 		ctx.clearRect(0,0,1500,1000);
-		mousexCo -= 15;
+		mousexCo -= 25;
 		drawMouse();
 	}
 	if(event.key == "w" && mouseyCo>0){
 		ctx.clearRect(0,0,1500,1000);
-		mouseyCo -= 15;
+		mouseyCo -= 25;
 		drawMouse();
 	}
 	if(event.key == "s" && (mouseyCo + mouse.height)<maxY){
 		ctx.clearRect(0,0,1500,1000);
-		mouseyCo += 15;
+		mouseyCo += 25;
 		drawMouse();
 	}
 	
