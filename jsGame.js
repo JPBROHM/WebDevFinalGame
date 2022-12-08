@@ -54,23 +54,13 @@ function drawCat() {
 		ctx.drawImage(hole, 1250, 450);
 		
 	}
-	if (catxCo >= (canvas.width - crazycat.width) && (catyCo + crazycat.height) >= maxY){
-		var youClass = document.getElementsByClassName("you");
-		
-		for (i = 0; i < youClass.length; i++){
-			youClass[i].style.color = "pink";
-			youClass[i].style.fontSize = "30px";
-		}
-		
-		alert("ayo bro you the cat there good job");
-	}
 
 	if (checkCollision(catWidth, catHeight, mouseWidth, mouseHeight)) {
-		alert("oh shit ouch fuck, cat ate the mouse");
+		alert("Yowch! The cat has caught the mouse! One win to the cat");
 		initalize();
 	}
 	if (checkHole(holeWidth, holeHeight, mouseWidth, mouseHeight)) {
-		alert("oh shit oh fuck mouse's fam be eatin' tonight babbyyy");
+		alert("Hooray! The mouse's fam gets to eat tonight! One win to the mouse");
 		initalize();
 	}
 };
@@ -100,7 +90,6 @@ function checkCheese(cheeseIdx, cWidth, cHeight, mWidth, mHeight) {
 		if (cheese[cheeseIdx] == false) {
 			cheeseCollected += 1;
 			cheese[cheeseIdx] = true;
-			alert(cheeseCollected);
 		}
 	}
 }
@@ -113,7 +102,7 @@ function checkHole(hWidth, hHeight, mWidth, mHeight) {
 
 	if ((overlapX && overlapY) && (cheeseCollected >= 5)) {
 		if (cheeseCollected >= 8) {
-			alert("yo fuck that cat there's no more g-dang cheese left");
+			alert("Woooaaah!! All 8 cheeses! That's an extra win to the mouse for this round!");
 		}
 		return true;
 	} else {
@@ -152,23 +141,13 @@ function drawMouse() {
 		}
 		ctx.drawImage(hole, 1250, 450);
 	}
-	if (mousexCo >= (canvas.width - mouse.width) && (mouseyCo + mouse.height) >= maxY){
-		var youClass = document.getElementsByClassName("you");
-		
-		for (i = 0; i < youClass.length; i++){
-			youClass[i].style.color = "pink";
-			youClass[i].style.fontSize = "30px";
-		}
-		
-		alert("ayo bro you the cat there good job");
-	}
 
 	if (checkCollision(catWidth, catHeight, mouseWidth, mouseHeight)) {
-		alert("oh shit ouch fuck, cat ate the mouse");
+		alert("Yowch! The cat has caught the mouse! One win to the cat");
 		initalize();
 	}
 	if (checkHole(holeWidth, holeHeight, mouseWidth, mouseHeight)) {
-		alert("oh shit oh fuck mouse's fam be eatin' tonight babbyyy");
+		alert("Hooray! The mouse's fam gets to eat tonight! One win to the mouse");
 		initalize();
 		if (cheeseCollected >= 8) {
 			alert("yo fuck that cat there's no more g-dang cheese left");
