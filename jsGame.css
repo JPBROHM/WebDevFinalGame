@@ -1,3 +1,17 @@
+:root {
+  --font-color: seaGreen;
+  --bg-color: mintcream;
+  --border-color: lightseagreen;
+}
+
+[data-theme="cool"] {    
+  --font-color: seaGreen;
+  --bg-color: mintcream;
+  --border-color: lightseagreen;
+}
+
+
+
 /* Create two columns using flexbox */
 * {
   box-sizing: border-box;

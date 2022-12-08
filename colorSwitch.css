@@ -1,15 +1,4 @@
 /* CSS variables */
-:root {
-    --font-color: seaGreen;
-    --bg-color: mintcream;
-    --border-color: lightseagreen;
-}
-
-[data-theme="cool"] {    
-    --font-color: seaGreen;
-    --bg-color: mintcream;
-    --border-color: lightseagreen;
-}
 
 
 
